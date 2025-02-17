@@ -1,0 +1,12 @@
+<div class="container">
+  <h2>Login</h2>
+  <form (ngSubmit)="onLogin()" #loginForm="ngForm">
+    <input type="email" [(ngModel)]="user.email" name="email" placeholder="Enter Email" required>
+    <input type="password" [(ngModel)]="user.password" name="password" placeholder="Enter Password" required>
+    <button type="submit" [disabled]="loginForm.invalid">Log In</button>
+  </form>
+
+  <p *ngIf="message" class="message">{{ message }}</p>
+
+  <a routerLink="/signup" class="signup-link">Don't have an account? Sign Up</a>
+</div>
