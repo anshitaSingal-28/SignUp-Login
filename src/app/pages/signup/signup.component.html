@@ -1,13 +1,30 @@
 <div class="container">
-<h2>Sign Up</h2>
-<form (ngSubmit)="onSignup()">
-  <input type="text" [(ngModel)]="user.name" name="name" placeholder="Enter Name" required>
-  <input type="email" [(ngModel)]="user.email" name="email" placeholder="Enter Email" required>
-  <input type="password" [(ngModel)]="user.password" name="password" placeholder="Enter Password" required>
-  <button type="submit">Sign Up</button>
-</form>
+  <h2>Sign Up</h2>
+  <form [formGroup]="signupForm" (ngSubmit)="onSignup()">
+    
+    <input type="text" formControlName="name" placeholder="Enter Name">
+    <div *ngIf="signupForm.get('name')?.invalid && signupForm.get('name')?.touched">
+      <small *ngIf="signupForm.get('name')?.errors?.['required']">Name is required.</small>
+      <small *ngIf="signupForm.get('name')?.errors?.['minlength']">Name must be at least 3 characters long.</small>
+    </div>
 
-<p>{{ message }}</p>
-<a routerLink="/login">Already have an account? Login</a>
+    <input type="email" formControlName="email" placeholder="Enter Email">
+    <div *ngIf="signupForm.get('email')?.invalid && signupForm.get('email')?.touched">
+      <small *ngIf="signupForm.get('email')?.errors?.['required']">Email is required.</small>
+      <small *ngIf="signupForm.get('email')?.errors?.['email']">Enter a valid email.</small>
+    </div>
+
+    <input type="password" formControlName="password" placeholder="Enter Password">
+    <div *ngIf="signupForm.get('password')?.invalid && signupForm.get('password')?.touched">
+      <small *ngIf="signupForm.get('password')?.errors?.['required']">Password is required.</small>
+      <small *ngIf="signupForm.get('password')?.errors?.['pattern']">
+        Password must contain at least 8 characters, including uppercase, lowercase, number, and special character.
+      </small>
+    </div>
+
+    <button type="submit" [disabled]="signupForm.invalid">Sign Up</button>
+  </form>
+
+  <p>{{ message }}</p>
+  <a routerLink="/login">Already have an account? Login</a>
 </div>
-

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms'; // ✅ Import ReactiveFormsModule
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module'; // ✅ Import routing module
 
@@ -22,6 +22,7 @@ import { AuthGuard } from './guards/auth.guard'; // ✅ Import AuthGuard
   imports: [
     BrowserModule,
     FormsModule,
+    ReactiveFormsModule, // ✅ Required for formGroup validation
     HttpClientModule,
     AppRoutingModule // ✅ Use AppRoutingModule for clean routing
   ],
